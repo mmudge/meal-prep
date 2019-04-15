@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <AppNav :appName="myAppName"/>
-    <v-content>
+    <v-content transition="slide-x-transition">
       <router-view/>
     </v-content>
   </v-app>
