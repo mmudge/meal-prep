@@ -1,24 +1,29 @@
 <template>
-  <v-container fluid>
-    <v-layout xs12 sm6 offset-sm3>
-      <div v-for="meal in mealPlanOptions" :key="meal.type">
-        <MealPlans
-          :type="meal.type"
-          :food="meal.food"
-          :details="meal.details"
-          :primaryMacro="meal.primaryMacro"
-        />
-      </div>
-    </v-layout>
-  </v-container>
+  <div>
+    <v-container fluid>
+      <v-layout xs12 sm6 offset-sm3>
+        <div v-for="meal in mealPlanOptions" :key="meal.type">
+          <MealPlans
+            :type="meal.type"
+            :food="meal.food"
+            :details="meal.details"
+            :primaryMacro="meal.primaryMacro"
+          />
+        </div>
+      </v-layout>
+    </v-container>
+    <MealRecipes/>
+  </div>
 </template>
 
 <script>
 import MealPlans from '../components/MealPlans.vue';
+import MealRecipes from '../components/MealRecipes.vue';
 export default {
     name: 'Menu',
     components: {
-        MealPlans
+        MealPlans,
+        MealRecipes
     },
     data() {
         return {

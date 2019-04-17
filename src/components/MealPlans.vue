@@ -38,29 +38,9 @@
 export default {
     name: 'MealPlans',
     props: ['type', 'details', 'primaryMacro', 'food'],
-    data() {
-        return {
-            recipes: []
-        };
-    },
     methods: {
-        showRecipes(type) {
-            const api = '90387923bafd2bf3ff07e13b8e272fd0';
-            const appId = '516372f1';
-
-            fetch(
-                `https://api.edamam.com/search?q=${type}&app_id=${appId}&app_key=${api}&from=0&to=9`
-            )
-                .then(response => {
-                    return response.json();
-                })
-                .then(res => {
-                    this.recipes = res.hits;
-                    console.log(this.recipes);
-                })
-                .catch(err => {
-                    console.log('you got an error', err);
-                });
+        showRecipes() {
+            this.$store.dispatch('getRecipes', this.type);
         }
     }
 };
