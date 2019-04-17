@@ -1,18 +1,16 @@
 <template>
   <container fluid>
     <layout>
-      <h1>About page</h1>
+      <h1>Sign In Page</h1>
     </layout>
   </container>
 </template>
 
-
 <script>
 export default {
-    name: 'About'
+    name: 'Signin'
 };
 </script>
 
 <style>
 </style>
-

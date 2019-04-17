@@ -13,11 +13,14 @@
     <v-toolbar app color="brown darken-4" dark>
       <v-toolbar-side-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
-      <v-toolbar-title>{{ appName }}</v-toolbar-title>
-      <v-btn flat class="hidden-sm-and-down">Menu</v-btn>
+      <v-btn dark flat to="/">
+        <v-toolbar-title>{{ appName }}</v-toolbar-title>
+      </v-btn>
+
+      <v-btn to="/menu" flat class="hidden-sm-and-down">Menu</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
-      <v-btn flat class="hidden-sm-and-down">SIGN IN</v-btn>
-      <v-btn color="brown lighten-3 hidden-sm-and-down">JOIN</v-btn>
+      <v-btn to="/signin" flat class="hidden-sm-and-down">SIGN IN</v-btn>
+      <v-btn to="/join" color="brown lighten-3 hidden-sm-and-down">JOIN</v-btn>
     </v-toolbar>
   </span>
 
@@ -36,6 +39,7 @@ export default {
             drawer: false,
             navDropItems: [
                 { title: 'Menu' },
+                { title: 'Profile' },
                 { title: 'Sign In' },
                 { title: 'Join' }
             ]
