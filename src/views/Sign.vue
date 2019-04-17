@@ -3,8 +3,8 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12">
-          <v-toolbar color="primary" dark>
-            <v-toolbar-title>Join Us!</v-toolbar-title>
+          <v-toolbar dark color="primary">
+            <v-toolbar-title>Login Form</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
@@ -19,7 +19,7 @@
               ></v-text-field>
               <v-text-field
                 prepend-icon="lock"
-                mame="password"
+                name="password"
                 label="Password"
                 id="password"
                 type="password"
@@ -31,7 +31,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" :disabled="!valid" @click="submit">Join</v-btn>
+            <v-btn color="primary" :disabled="!valid" @click="submit">Login</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-    name: 'Join',
+    name: 'Sign',
     data() {
         return {
             valid: false,
@@ -62,7 +62,7 @@ export default {
     methods: {
         submit() {
             if (this.$refs.form.validate()) {
-                this.$store.dispatch('userJoin', {
+                this.$store.dispatch('userLogin', {
                     email: this.email,
                     password: this.password
                 });
@@ -72,5 +72,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

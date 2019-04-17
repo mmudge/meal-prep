@@ -2,9 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 
+import store from '@/store.js';
+
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
@@ -20,7 +22,10 @@ export default new Router({
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
             component: () =>
-                import(/* webpackChunkName: "about" */ './views/About.vue')
+                import(/* webpackChunkName: "about" */ './views/About.vue'),
+            meta: {
+                authRequired: true
+            }
         },
         {
             path: '/menu',
@@ -29,10 +34,10 @@ export default new Router({
                 import(/* webpackChunkName: "menu" */ './views/Menu.vue')
         },
         {
-            path: '/sign-in',
-            name: 'signin',
+            path: '/sign',
+            name: 'sign',
             component: () =>
-                import(/* webpackChunkName: "signin" */ './views/Signin.vue')
+                import(/* webpackChunkName: "signin" */ './views/Sign.vue')
         },
         {
             path: '/join',
@@ -42,3 +47,19 @@ export default new Router({
         }
     ]
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.authRequired)) {
+        if (!store.state.user) {
+            next({
+                path: '/sign'
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
+export default router;

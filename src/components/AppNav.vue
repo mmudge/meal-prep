@@ -18,9 +18,15 @@
       </v-btn>
 
       <v-btn to="/menu" flat class="hidden-sm-and-down">Menu</v-btn>
-      <v-spacer class="hidden-sm-and-down"></v-spacer>
-      <v-btn to="/signin" flat class="hidden-sm-and-down">SIGN IN</v-btn>
-      <v-btn to="/join" color="brown lighten-3 hidden-sm-and-down">JOIN</v-btn>
+      <v-spacer></v-spacer>
+      <div class="hidden-sm-and-down" v-if="!isAuthenticated">
+        <v-btn to="/sign" flat class="hidden-sm-and-down">SIGN IN</v-btn>
+        <v-btn to="/join" color="brown lighten-3 hidden-sm-and-down">JOIN</v-btn>
+      </div>
+      <div v-else>
+        <v-btn flat to="/about">Profile</v-btn>
+        <v-btn dark outline color="white" @click="logout">Logout</v-btn>
+      </div>
     </v-toolbar>
   </span>
 
@@ -44,9 +50,23 @@ export default {
                 { title: 'Join' }
             ]
         };
+    },
+    computed: {
+        isAuthenticated() {
+            return this.$store.getters.isAuthenticated;
+        }
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('userSignOut');
+        }
     }
 };
 </script>
 
 <style scoped>
+a {
+    color: white;
+    text-decoration: none;
+}
 </style>
